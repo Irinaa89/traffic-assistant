@@ -1,0 +1,21 @@
+.footer {
+  width: 100%;
+}
+
+.footer-inner {
+  text-align: left;
+}
+
+.footer__title {
+  font-size: 12px;
+  margin-bottom: 5px;
+}
+
+.footer__list-item {
+  list-style: none;
+  font-size: 12px;
+}
+
+.footer__list-item:hover {
+  color: rgb(219, 100, 255);
+}
