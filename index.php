@@ -22,9 +22,9 @@
       <div class="container">
         <div class="header-inner">
           <ul class="header__list">
-            <a href="" class="header__list-item">Стастистика регионов</a>
-            <a href="" class="header__list-item">Статистика пострадавших</a>
-            <a href="" class="header__list-item">Советы и рекомендации</a>
+            <a href="./php/regional_statistics.php" class="header__list-item">Стастистика регионов</a>
+            <a href="./php/statistics_of_victims.php" class="header__list-item">Статистика пострадавших</a>
+            <a href="./php/tips_and_recommendations.php" class="header__list-item">Советы и рекомендации</a>
           </ul>
         </div>
       </div>

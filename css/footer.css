@@ -35,3 +35,8 @@
 .footer__list-item:hover a {
   color: rgb(183, 0, 255);
 }
+
+.keyword {
+  color: rgb(183, 0, 255);
+  font-weight: bold;
+}

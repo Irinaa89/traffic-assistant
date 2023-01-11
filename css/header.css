@@ -1,10 +1,6 @@
 .header {
   width: 100%;
   padding: 20px 0;
-  position: absolute;
-  top: 0;
-  left: 0;
-  z-index: 2;
 }
 
 .header__list {
@@ -18,6 +14,7 @@
   margin: 0 40px;
   border: 1px solid black;
   padding: 10px 20px;
+  border-radius: 10px;
 }
 
 .header__list-item:hover {
@@ -26,11 +23,21 @@
   border-color: rgb(183, 0, 255);
 }
 
+.statistics-item {
+  text-align: left;
+  margin: 0;
+  padding: 5px 10px;
+}
+
+.statistics-menu {
+  justify-content: left;
+}
+
 /* Медиа запросы для адаптива */
-@media screen and (max-width: 420px),
-screen and (max-height: 390px) {
+@media screen and (max-width: 420px), screen and (max-height: 390px) {
   .header__list-item {
-    margin: 0 10px;
-    font-size: 14px;
+    margin: 0 3px;
+    font-size: 12px;
+    padding: 5px 15px;
   }
 }

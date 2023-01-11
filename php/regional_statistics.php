@@ -1,51 +1,44 @@
 <!DOCTYPE html>
-<html lang="ru">
+<html lang="en">
   <head>
     <meta charset="UTF-8" />
     <meta http-equiv="X-UA-Compatible" content="IE=edge" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <link rel="stylesheet" href="./css/style.css" />
-    <link rel="stylesheet" href="./css/header.css" />
-    <link rel="stylesheet" href="./css/main.css" />
-    <link rel="stylesheet" href="./css/footer.css" />
+    <link rel="stylesheet" href="../css/style.css" />
+    <link rel="stylesheet" href="../css/header.css" />
+    <link rel="stylesheet" href="../css/graph.css" />
+    <link rel="stylesheet" href="../css/footer.css" />
     <link
       rel="shortcut icon"
-      href="./images/road-accident-svgrepo-com.svg"
+      href="../images/road-accident-svgrepo-com.svg"
       type="image/x-icon"
     />
-
-    <title>Помощник ПДД</title>
+    <title>Общая статистика</title>
   </head>
-
   <body>
     <header class="header">
       <div class="container">
         <div class="header-inner">
-          <ul class="header__list">
-            <a href="" class="header__list-item">Стастистика регионов</a>
-            <a href="" class="header__list-item">Статистика пострадавших</a>
-            <a href="" class="header__list-item">Советы и рекомендации</a>
+          <ul class="header__list statistics-menu">
+            <a href="../index.php" class="header__list-item statistics-item"
+              >Вернуться назад
+            </a>
+            <img
+              src="../images/robot-love-svgrepo-com.svg"
+              alt="pdd-helper"
+              height="30"
+              width="30"
+            />
           </ul>
         </div>
       </div>
     </header>
 
-    <main class="main">
+    <main class="graph">
       <div class="container">
-        <div class="main-inner">
-          <img
-            src="./images/robot-love-svgrepo-com.svg"
-            alt="pdd-helper"
-            width="200"
-            height="200"
-          />
-          <h1 class="main__title">Помощник ПДД</h1>
-          <p class="main__info">
-            Приложение использует <span class="keyword">открытые данные</span>,
-            связанные с дорожно-транспортными проишествиями, чтобы
-            проанализировать их, отобразить пользователю и дать рекомендации как
-            избежать те или иные виды ДТП и сохранить свое здоровье.
-          </p>
+        <div class="graph-inner">
+          <div class="graph__title">Название графика</div>
+          <div class="graph__chart">График</div>
         </div>
       </div>
     </main>
