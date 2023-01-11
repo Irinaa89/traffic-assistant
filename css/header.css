@@ -1,7 +1,36 @@
 .header {
   width: 100%;
-  padding: 10px 0;
+  padding: 20px 0;
+  position: absolute;
+  top: 0;
+  left: 0;
+  z-index: 2;
 }
 
-.header__inner {
+.header__list {
+  display: flex;
+  justify-content: center;
+  text-align: center;
+}
+
+.header__list-item {
+  list-style: none;
+  margin: 0 40px;
+  border: 1px solid black;
+  padding: 10px 20px;
+}
+
+.header__list-item:hover {
+  color: #fff;
+  background-color: rgb(183, 0, 255);
+  border-color: rgb(183, 0, 255);
+}
+
+/* Медиа запросы для адаптива */
+@media screen and (max-width: 420px),
+screen and (max-height: 390px) {
+  .header__list-item {
+    margin: 0 10px;
+    font-size: 14px;
+  }
 }
