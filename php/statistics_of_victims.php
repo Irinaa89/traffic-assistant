@@ -61,11 +61,12 @@ $regions = array_unique($regions);
             <?php 
 
             foreach ($regions as $value) {
-              echo '<a href="?region='.str_replace(' ', '', $value).'" class="graph-regions__item">'.$value.'</a>';
-            } 
-            
-            
-            
+              if (isset($_GET["region"]) && str_replace(' ', '', $value) == $_GET["region"]) {
+                echo '<a href="?region='.str_replace(' ', '', $value).'" class="graph-regions__item active">'.$value.'</a>';
+              } else {
+                echo '<a href="?region='.str_replace(' ', '', $value).'" class="graph-regions__item">'.$value.'</a>';
+              }
+            }
             
             ?>
         
@@ -89,19 +90,10 @@ $regions = array_unique($regions);
             </li>
 
             <li class="footer__list-item">
-              <a href="https://data.mos.ru/datasets/759">
-                2. Нарушения ПДД, выявляемые с использованием автоматизированной
-                системы фотовидеофиксации нарушений правил дорожного движения
-                интеллектуальной транспортной системы города Москвы
-                <span class="keyword">[data.mos.ru]</span>
-              </a>
-            </li>
-
-            <li class="footer__list-item">
               <a
                 href="https://xn--b1aew.xn--p1ai/opendata/7727739372-MVDGIAC32"
               >
-                3. Безопасность дорожного движения
+                2. Безопасность дорожного движения
                 <span class="keyword">[мвд.рф]</span>
               </a>
             </li>
@@ -147,16 +139,23 @@ $regions = array_unique($regions);
 
         if (isset($_GET["region"])) {
   
-          $query = mysqli_query($connect, "SELECT * FROM statistics_of_victims WHERE Subject='Брянская область'");
+          if (isset($_GET["region"])) {
+            foreach ($regions  as $value) {
+              if (str_replace(' ', '', $value) == $_GET["region"]) {
+                $query = mysqli_query($connect, "SELECT * FROM statistics_of_victims WHERE Subject='".$value."'");
+              }
+            }
+          }
+
           
         
           while ($string = mysqli_fetch_assoc($query)) {
             $arr = array();
             array_push($arr, $string["Name_of_the_statistical_factor"]);
-            array_push($arr,$string ["Importance_of_the_statistical_factor"]);
+            array_push($arr, (int)$string ["Importance_of_the_statistical_factor"]);
             array_push($data, $arr);
           }
-        }
+        } 
 
 
         echo json_encode($data);
@@ -173,13 +172,22 @@ $regions = array_unique($regions);
         .offsetX(5)
         .offsetY(0)
         .titleFormat('{%X}')
-        .format('{%Value}');
+        .format('{%Value} человек(а)');
+
+      // colors
+      series.normal().fill("rgb(183, 0, 255)", 0.4);
+      series.hovered().fill("rgb(183, 0, 255)", 0.1);
+      series.selected().fill("rgb(183, 0, 255)", 0.5);
+
+      series.normal().stroke("rgb(183, 0, 255)", 1);
+      series.hovered().stroke("rgb(183, 0, 255)", 2);
+      series.selected().stroke("rgb(183, 0, 255)", 4);
 
       // set yAxis labels formatter
       chart.yAxis().labels().format('{%Value}{groupsSeparator: }');
 
       // set titles for axises
-      chart.xAxis().title('Название фактора');
+      chart.xAxis().title('').labels().fontSize(12).width(120);
       chart.yAxis().title('Количество');
       chart.interactivity().hoverMode('by-x');
       chart.tooltip().positionMode('point');

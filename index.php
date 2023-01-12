@@ -64,19 +64,10 @@
             </li>
 
             <li class="footer__list-item">
-              <a href="https://data.mos.ru/datasets/759">
-                2. Нарушения ПДД, выявляемые с использованием автоматизированной
-                системы фотовидеофиксации нарушений правил дорожного движения
-                интеллектуальной транспортной системы города Москвы
-                <span class="keyword">[data.mos.ru]</span>
-              </a>
-            </li>
-
-            <li class="footer__list-item">
               <a
                 href="https://xn--b1aew.xn--p1ai/opendata/7727739372-MVDGIAC32"
               >
-                3. Безопасность дорожного движения
+                2. Безопасность дорожного движения
                 <span class="keyword">[мвд.рф]</span>
               </a>
             </li>

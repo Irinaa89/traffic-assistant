@@ -1,3 +1,9 @@
+<?php
+
+require("tips.php");
+
+?>
+
 <!DOCTYPE html>
 <html lang="en">
   <head>
@@ -38,7 +44,7 @@
       <div class="container">
         <div class="graph-inner">
           <div class="graph__title">Название графика</div>
-          <div class="graph__chart">График</div>
+          <div class="graph__chart"><?php echo $for_walker ?></div>
         </div>
       </div>
     </main>
