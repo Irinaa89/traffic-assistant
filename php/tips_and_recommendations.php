@@ -60,7 +60,7 @@ require("tips.php");
                 </a>
 
                 <a 
-                href="tips_and_recommendations.php?type=driver" 
+                href="tips_and_recommendations.php?type=driver&weather=ice" 
                 class=<?php 
                   if (isset($_GET["type"]) && $_GET["type"] == "driver") {
                     echo "active";
@@ -152,16 +152,52 @@ require("tips.php");
             </div>
             <div class="tips__text">
               <?php 
+              if (!isset($_GET["type"])) {
+                echo '
+                <div class="robot-wrapper">
+                  <img class="robot" src="../images/robot-danger-svgrepo-com.svg" alt="robot" height="230" width="230">
+                  <p class="robot-text">Упс! Вы ничего не выбрали...</p>
+                </div>
+                ';
+              } else { 
                 if (isset($_GET["type"]) && $_GET["type"] == "walker") {
                   echo $for_walker;
                 }
+
+                else if (isset($_GET["type"]) && $_GET["type"] == "driver") {
+
+                  if (isset($_GET["weather"]) && $_GET["weather"] == "ice") {
+                    echo $driver_tips["ice"];
+                  }
+
+                  if (isset($_GET["weather"]) && $_GET["weather"] == "snowfall") {
+                    echo $driver_tips["snowfall"];
+                  }
+
+                  if (isset($_GET["weather"]) && $_GET["weather"] == "rain") {
+                    echo $driver_tips["rain"];
+                  }
+
+                  if (isset($_GET["weather"]) && $_GET["weather"] == "fog") {
+                    echo $driver_tips["fog"];
+                  }
+
+                  if (isset($_GET["weather"]) && $_GET["weather"] == "wind") {
+                    echo $driver_tips["wind"];
+                  }
+
+                  if (isset($_GET["weather"]) && $_GET["weather"] == "night_time") {
+                    echo $driver_tips["night_time"];
+                  }
+                }
+              }
               ?>
             </div>
           </div>
         </div>
       </div>
     </main>
-    <footer class="footer">
+    <footer class="tips-footer">
       <div class="container">
         <div class="footer-inner">
           <p class="footer__title">Источники открытых данных:</p>
