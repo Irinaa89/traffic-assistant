@@ -32,7 +32,7 @@ $regions = array_unique($regions);
       href="../images/road-accident-svgrepo-com.svg"
       type="image/x-icon"
     />
-    <title>Общая статистика</title>
+    <title>Статистика пострадавших</title>
   </head>
   <body class="graph-body">
     <header class="header">

@@ -12,14 +12,14 @@ require("tips.php");
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <link rel="stylesheet" href="../css/style.css" />
     <link rel="stylesheet" href="../css/header.css" />
-    <link rel="stylesheet" href="../css/graph.css" />
+    <link rel="stylesheet" href="../css/tips.css" />
     <link rel="stylesheet" href="../css/footer.css" />
     <link
       rel="shortcut icon"
       href="../images/road-accident-svgrepo-com.svg"
       type="image/x-icon"
     />
-    <title>Общая статистика</title>
+    <title>Советы и рекомендации</title>
   </head>
   <body>
     <header class="header">
@@ -40,11 +40,35 @@ require("tips.php");
       </div>
     </header>
 
-    <main class="graph">
+    <main class="tips">
       <div class="container">
-        <div class="graph-inner">
-          <div class="graph__title">Название графика</div>
-          <div class="graph__chart"><?php echo $for_walker ?></div>
+        <div class="tips-inner">
+          <div class="tips__title">Советы для водителей и пешеходов</div>
+          <div class="tips__content">
+            <div class="tips__buttons">
+              <div class="select-type">
+                <a
+                href="tips_and_recommendations.php?type=walker" 
+                class=<?php 
+                  if (isset($_GET["type"]) && $_GET["type"] == "walker") {
+                    echo "active";
+                  } else {
+                    echo "";
+                  }
+                ?>>Пешеход</a>
+                <a 
+                href="tips_and_recommendations.php?type=driver" 
+                class=<?php 
+                  if (isset($_GET["type"]) && $_GET["type"] == "driver") {
+                    echo "active";
+                  } else {
+                    echo "";
+                  }
+                ?>>Водитель</a>
+                </div>
+            </div>
+            <div class="tips__text">Some text</div>
+          </div>
         </div>
       </div>
     </main>
@@ -63,19 +87,10 @@ require("tips.php");
             </li>
 
             <li class="footer__list-item">
-              <a href="https://data.mos.ru/datasets/759">
-                2. Нарушения ПДД, выявляемые с использованием автоматизированной
-                системы фотовидеофиксации нарушений правил дорожного движения
-                интеллектуальной транспортной системы города Москвы
-                <span class="keyword">[data.mos.ru]</span>
-              </a>
-            </li>
-
-            <li class="footer__list-item">
               <a
                 href="https://xn--b1aew.xn--p1ai/opendata/7727739372-MVDGIAC32"
               >
-                3. Безопасность дорожного движения
+                2. Безопасность дорожного движения
                 <span class="keyword">[мвд.рф]</span>
               </a>
             </li>

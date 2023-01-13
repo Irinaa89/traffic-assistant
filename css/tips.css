@@ -1,0 +1,47 @@
+.tips__title {
+  text-align: center;
+  margin-bottom: 10px;
+}
+
+.tips__content {
+  display: flex;
+}
+
+.tips__buttons {
+  margin-right: 20px;
+  width: 15%;
+}
+
+.tips__text {
+  width: 85%;
+}
+
+.select-type {
+  display: flex;
+  flex-direction: column;
+}
+
+.select-type a {
+  padding: 5px 15px;
+  border: 1px solid black;
+  border-radius: 10px;
+  cursor: pointer;
+  font-size: 13px;
+  margin: 5px 0;
+  max-width: 150px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.select-type a:hover {
+  border-color: rgb(183, 0, 255);
+  background-color: rgb(183, 0, 255);
+  color: #fff;
+}
+
+.active {
+  background-color: rgb(183, 0, 255);
+  color: #fff;
+  border-color: rgb(183, 0, 255) !important;
+}
