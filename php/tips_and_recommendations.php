@@ -47,6 +47,7 @@ require("tips.php");
           <div class="tips__content">
             <div class="tips__buttons">
               <div class="select-type">
+                
                 <a
                 href="tips_and_recommendations.php?type=walker" 
                 class=<?php 
@@ -55,7 +56,9 @@ require("tips.php");
                   } else {
                     echo "";
                   }
-                ?>>Пешеход</a>
+                ?>>Пешеход
+                </a>
+
                 <a 
                 href="tips_and_recommendations.php?type=driver" 
                 class=<?php 
@@ -64,10 +67,96 @@ require("tips.php");
                   } else {
                     echo "";
                   }
-                ?>>Водитель</a>
+                ?>>Водитель
+                </a>
+
+                
+
+                <div class=<?php 
+                  if (isset($_GET["type"]) && $_GET["type"] == "driver") {
+                    echo "weather";
+                  } else {
+                    echo "hidden";
+                  }
+                
+                ?>>
+
+                  <a
+                  href="tips_and_recommendations.php?type=driver&weather=ice" 
+                  class=<?php 
+                    if (isset($_GET["weather"]) && $_GET["weather"] == "ice") {
+                      echo "active";
+                    } else {
+                      echo "";
+                    }
+                  ?>>Гололед
+                  </a>
+
+                  <a
+                  href="tips_and_recommendations.php?type=driver&weather=snowfall" 
+                  class=<?php 
+                    if (isset($_GET["weather"]) && $_GET["weather"] == "snowfall") {
+                      echo "active";
+                    } else {
+                      echo "";
+                    }
+                  ?>>Снегопад
+                  </a>
+
+                  <a
+                  href="tips_and_recommendations.php?type=driver&weather=rain" 
+                  class=<?php 
+                    if (isset($_GET["weather"]) && $_GET["weather"] == "rain") {
+                      echo "active";
+                    } else {
+                      echo "";
+                    }
+                  ?>>Дождь
+                  </a>
+
+                  <a
+                  href="tips_and_recommendations.php?type=driver&weather=fog" 
+                  class=<?php 
+                    if (isset($_GET["weather"]) && $_GET["weather"] == "fog") {
+                      echo "active";
+                    } else {
+                      echo "";
+                    }
+                  ?>>Туман
+                  </a>
+
+                  <a
+                  href="tips_and_recommendations.php?type=driver&weather=wind" 
+                  class=<?php 
+                    if (isset($_GET["weather"]) && $_GET["weather"] == "wind") {
+                      echo "active";
+                    } else {
+                      echo "";
+                    }
+                  ?>>Сильный ветер
+                  </a>
+
+                  <a
+                  href="tips_and_recommendations.php?type=driver&weather=night_time" 
+                  class=<?php 
+                    if (isset($_GET["weather"]) && $_GET["weather"] == "night_time") {
+                      echo "active";
+                    } else {
+                      echo "";
+                    }
+                  ?>>Ночь
+                  </a>
+
                 </div>
+              </div>
             </div>
-            <div class="tips__text">Some text</div>
+            <div class="tips__text">
+              <?php 
+                if (isset($_GET["type"]) && $_GET["type"] == "walker") {
+                  echo $for_walker;
+                }
+              ?>
+            </div>
           </div>
         </div>
       </div>
@@ -100,3 +189,4 @@ require("tips.php");
     </footer>
   </body>
 </html>
+

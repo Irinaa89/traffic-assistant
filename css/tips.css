@@ -45,3 +45,11 @@
   color: #fff;
   border-color: rgb(183, 0, 255) !important;
 }
+
+.weather {
+  margin-top: 15px;
+}
+
+.hidden {
+  display: none;
+}
