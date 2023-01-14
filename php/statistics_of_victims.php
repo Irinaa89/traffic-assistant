@@ -2,6 +2,7 @@
 
 require("dbconnect.php");
 
+// Для первого графика
 $query = mysqli_query($connect, "SELECT * FROM statistics_of_victims");
 $regions = array();
 
@@ -11,6 +12,13 @@ while ($string = mysqli_fetch_assoc($query)) {
 
 $regions = array_unique($regions);
 
+// Для второго графика
+$query = mysqli_query($connect, "SELECT * FROM statistics_of_victims");
+$raitings_of_regions = array();
+
+while ($string = mysqli_fetch_assoc($query)) {
+   $raitings_of_regions[$string["Subject"]] += (int) $row["Importance_of_the_statistical_factor"];
+}
 
 ?>
 
@@ -72,6 +80,7 @@ $regions = array_unique($regions);
         
           </div>
           <div id="graph" class="graph__chart"></div>
+          <div id="graph-raiting" class="graph__chart"></div>
         </div>
       </div>
     </main>
@@ -107,6 +116,7 @@ $regions = array_unique($regions);
   <script src="https://cdn.anychart.com/releases/v8/js/anychart-exports.min.js"></script>
   <script>
 
+    // Первая диграмма (количество)
     anychart.onDocumentReady(function () {
       // create bar chart
       var chart = anychart.bar();
@@ -199,6 +209,36 @@ $regions = array_unique($regions);
       // initiate chart drawing
       chart.draw();
     });
+
+// Вторая диграмма (рейтинг регионов)
+anychart.onDocumentReady(function() {
+
+// set the data
+var data = {
+  header: ['Name', 'Количество'],
+  rows: [
+    ['San-Francisco (1906)', 1500],
+    ['Messina (1908)', 87000],
+    ['Ashgabat (1948)', 175000],
+    ['Chile (1960)', 10000],
+    ['Tian Shan (1976)', 242000],
+    ['Armenia (1988)', 25000],
+    ['Iran (1990)', 50000]
+  ]};
+
+// create the chart
+var chart = anychart.column();
+
+// add data
+chart.data(data);
+
+// set the chart title
+chart.title('Рейтинг регионов');
+
+// draw
+chart.container('graph-raiting');
+chart.draw();
+});
   
 </script>
   </body>
