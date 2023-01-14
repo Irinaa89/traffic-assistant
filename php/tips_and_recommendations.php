@@ -43,7 +43,7 @@ require("tips.php");
     <main class="tips">
       <div class="container">
         <div class="tips-inner">
-          <div class="tips__title">Советы для водителей и пешеходов</div>
+          <div class="tips__title">СОВЕТЫ ДЛЯ ВОДИТЕЛЕЙ И ПЕШЕХОДОВ</div>
           <div class="tips__content">
             <div class="tips__buttons">
               <div class="select-type">
