@@ -12,6 +12,7 @@ while ($string = mysqli_fetch_assoc($query)) {
 $regions = array_unique($regions);
 
 
+$data = array();
 ?>
 
 
@@ -73,6 +74,7 @@ $regions = array_unique($regions);
         
           </div>
           <div id="graph" class="graph__chart"></div>
+          <div id="graph-percent" class="graph__chart"></div>
         </div>
       </div>
     </main>
@@ -139,16 +141,13 @@ $regions = array_unique($regions);
         $data = array();
 
         if (isset($_GET["region"])) {
-  
-          if (isset($_GET["region"])) {
-            foreach ($regions  as $value) {
+
+          foreach ($regions  as $value) {
               if (str_replace(' ', '', $value) == $_GET["region"]) {
                 $query = mysqli_query($connect, "SELECT * FROM regional_statistics WHERE Subject='".$value."'");
               }
-            }
           }
-
-          
+  
         
           while ($string = mysqli_fetch_assoc($query)) {
             $arr = array();
@@ -197,6 +196,136 @@ $regions = array_unique($regions);
 
       // set container id for the chart
       chart.container('graph');
+      // initiate chart drawing
+      chart.draw();
+    });
+
+
+    // Процентный график
+    anychart.onDocumentReady(function () {
+      // create bar chart
+      var chart = anychart.bar();
+
+      chart.animation(true);
+
+      chart.padding([10, 40, 5, 20]);
+
+      chart.title(
+        <?php 
+        if (isset($_GET["region"])) {
+          foreach ($regions  as $value) {
+            if (str_replace(' ', '', $value) == $_GET["region"]) {
+              echo json_encode($value." (Процентное соотношение показателей)");
+            }
+          }
+        } else {
+          echo json_encode("Выберите регион");
+        }
+          
+          ?>
+      );
+
+      // create bar series with passed data
+      var series = chart.bar(
+
+        <?php 
+
+        $data = array();
+        $region = "";
+
+
+        if (isset($_GET["region"])) {
+
+          foreach ($regions  as $value) {
+              if (str_replace(' ', '', $value) == $_GET["region"]) {
+                $query = mysqli_query($connect, "SELECT * FROM regional_statistics WHERE Subject='".$value."'");
+                $region = $value;
+              }
+          }
+
+          $percent_chart_keys = array();
+        
+          while ($string = mysqli_fetch_assoc($query)) {
+            $arr = array();
+            array_push($arr, $string["Name_of_the_statistical_factor"]);
+            array_push($arr, (int)$string["Importance_of_the_statistical_factor"]);
+            array_push($data, $arr);
+
+            if (str_contains($string["Name_of_the_statistical_factor"], "всего")) {
+              $percent_chart_keys[$string["Name_of_the_statistical_factor"]] = (int)$string["Importance_of_the_statistical_factor"];
+            }
+          }
+        } 
+
+
+        $percent_chart_data = array();
+
+        if (isset($_GET["region"])) {
+          $query = mysqli_query($connect, "SELECT * FROM regional_statistics WHERE Subject='".$region."'");
+
+          while($string = mysqli_fetch_assoc($query)) {
+
+            if (str_contains($string["Name_of_the_statistical_factor"], "Наличие") && !str_contains($string["Name_of_the_statistical_factor"], "всего")) {
+              $arr = array();
+              array_push($arr, $string["Name_of_the_statistical_factor"]);
+              array_push($arr, round($string["Importance_of_the_statistical_factor"] / $percent_chart_keys["Наличие автомобильного транспорта всего"] * 100, 2));
+              array_push($percent_chart_data, $arr);
+            }
+
+            if (str_contains($string["Name_of_the_statistical_factor"], "Возбуждено") && !str_contains($string["Name_of_the_statistical_factor"], "всего")) {
+              $arr = array();
+              array_push($arr, $string["Name_of_the_statistical_factor"]);
+              array_push($arr, round($string["Importance_of_the_statistical_factor"] / $percent_chart_keys["Возбуждено дел об административных правонарушениях всего"]* 100, 2));
+              array_push($percent_chart_data, $arr);
+            }
+
+            if (str_contains($string["Name_of_the_statistical_factor"], "Количество") && !str_contains($string["Name_of_the_statistical_factor"], "всего")) {
+              $arr = array();
+              array_push($arr, $string["Name_of_the_statistical_factor"]);
+              array_push($arr, round($string["Importance_of_the_statistical_factor"] / $percent_chart_keys["Количество нарушителей правил дорожного движения всего"] * 100, 2));
+              array_push($percent_chart_data, $arr);
+            }
+          }
+        }
+        
+        echo json_encode($percent_chart_data);
+          
+        ?>
+
+      );
+
+      // set tooltip settings
+      series
+        .tooltip()
+        .position('right')
+        .anchor('left-center')
+        .offsetX(5)
+        .offsetY(0)
+        .titleFormat('{%X}')
+        .format('{%Value} (%)');
+
+      // colors
+      series.normal().fill("rgb(183, 0, 255)", 0.4);
+      series.hovered().fill("rgb(183, 0, 255)", 0.1);
+      series.selected().fill("rgb(183, 0, 255)", 0.5);
+
+      series.normal().stroke("rgb(183, 0, 255)", 1);
+      series.hovered().stroke("rgb(183, 0, 255)", 2);
+      series.selected().stroke("rgb(183, 0, 255)", 4);
+
+      // set yAxis labels formatter
+      chart.yAxis().labels().format('{%Value}{groupsSeparator: }');
+
+      // set titles for axises
+      chart.xAxis().title('').labels().fontSize(12).width(500);
+      chart.yAxis().title('Количество');
+      chart.interactivity().hoverMode('by-x');
+      chart.tooltip().positionMode('point');
+      // set scale minimum
+      chart.yScale().minimum(0);
+
+      // set container id for the chart
+      chart.container('graph-percent');
       // initiate chart drawing
       chart.draw();
     });

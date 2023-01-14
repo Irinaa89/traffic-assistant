@@ -166,12 +166,10 @@ foreach ($raitings_of_regions as $key => $value) {
 
         if (isset($_GET["region"])) {
   
-          if (isset($_GET["region"])) {
-            foreach ($regions  as $value) {
+          foreach ($regions  as $value) {
               if (str_replace(' ', '', $value) == $_GET["region"]) {
                 $query = mysqli_query($connect, "SELECT * FROM statistics_of_victims WHERE Subject='".$value."'");
               }
-            }
           }
 
           
