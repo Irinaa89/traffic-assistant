@@ -34,7 +34,7 @@ $regions = array_unique($regions);
     />
     <title>Статистика регионов</title>
   </head>
-  <body class="graph-body">
+  <body>
     <header class="header">
       <div class="container">
         <div class="header-inner">
@@ -67,9 +67,7 @@ $regions = array_unique($regions);
                 echo '<a href="?region='.str_replace(' ', '', $value).'" class="graph-regions__item">'.$value.'</a>';
               }
             }
-            
-            
-            
+                       
             
             ?>
         

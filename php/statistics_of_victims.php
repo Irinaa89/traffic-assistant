@@ -34,7 +34,7 @@ $regions = array_unique($regions);
     />
     <title>Статистика пострадавших</title>
   </head>
-  <body class="graph-body">
+  <body>
     <header class="header">
       <div class="container">
         <div class="header-inner">
