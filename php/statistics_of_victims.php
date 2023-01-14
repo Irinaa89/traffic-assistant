@@ -17,7 +17,24 @@ $query = mysqli_query($connect, "SELECT * FROM statistics_of_victims");
 $raitings_of_regions = array();
 
 while ($string = mysqli_fetch_assoc($query)) {
-   $raitings_of_regions[$string["Subject"]] += (int) $row["Importance_of_the_statistical_factor"];
+  if (isset($raitings_of_regions[$string["Subject"]])) {
+    $raitings_of_regions[$string["Subject"]] += (int) $string["Importance_of_the_statistical_factor"];
+  } else {
+    $raitings_of_regions[$string["Subject"]] = (int) $string["Importance_of_the_statistical_factor"];
+  }
+}
+
+arsort($raitings_of_regions);
+
+$raitings_of_regions = array_slice($raitings_of_regions, 1, 11);
+$data_raiting_chart = array();
+
+foreach ($raitings_of_regions as $key => $value) {
+  $arr = array();
+
+  array_push($arr, $key);
+  array_push($arr, $value);
+  array_push($data_raiting_chart, $arr);
 }
 
 ?>
@@ -208,37 +225,58 @@ while ($string = mysqli_fetch_assoc($query)) {
       chart.container('graph');
       // initiate chart drawing
       chart.draw();
-    });
+});
 
 // Вторая диграмма (рейтинг регионов)
-anychart.onDocumentReady(function() {
 
-// set the data
-var data = {
-  header: ['Name', 'Количество'],
-  rows: [
-    ['San-Francisco (1906)', 1500],
-    ['Messina (1908)', 87000],
-    ['Ashgabat (1948)', 175000],
-    ['Chile (1960)', 10000],
-    ['Tian Shan (1976)', 242000],
-    ['Armenia (1988)', 25000],
-    ['Iran (1990)', 50000]
-  ]};
+anychart.onDocumentReady(function () {
+      // create bar chart
+      var chart = anychart.bar();
 
-// create the chart
-var chart = anychart.column();
+      chart.animation(true);
 
-// add data
-chart.data(data);
+      chart.padding([10, 40, 5, 20]);
 
-// set the chart title
-chart.title('Рейтинг регионов');
+      chart.title('10 регионов с наибольшим количеством ДТП');
 
-// draw
-chart.container('graph-raiting');
-chart.draw();
-});
+      // create bar series with passed data
+      var series2 = chart.bar(<?php echo json_encode($data_raiting_chart) ?>);
+
+      // set tooltip settings
+      series2
+        .tooltip()
+        .position('right')
+        .anchor('left-center')
+        .offsetX(5)
+        .offsetY(0)
+        .titleFormat('{%X}')
+        .format('{%Value} человек(а)');
+
+      // colors
+      series2.normal().fill("rgb(183, 0, 255)", 0.4);
+      series2.hovered().fill("rgb(183, 0, 255)", 0.1);
+      series2.selected().fill("rgb(183, 0, 255)", 0.5);
+
+      series2.normal().stroke("rgb(183, 0, 255)", 1);
+      series2.hovered().stroke("rgb(183, 0, 255)", 2);
+      series2.selected().stroke("rgb(183, 0, 255)", 4);
+
+      // set yAxis labels formatter
+      chart.yAxis().labels().format('{%Value}{groupsSeparator: }');
+
+      // set titles for axises
+      chart.xAxis().title('').labels().fontSize(12).width(180);
+      chart.yAxis().title('Количество');
+      chart.interactivity().hoverMode('by-x');
+      chart.tooltip().positionMode('point');
+      // set scale minimum
+      chart.yScale().minimum(0);
+
+      // set container id for the chart
+      chart.container('graph-raiting');
+      // initiate chart drawing
+      chart.draw();
+    });
   
 </script>
   </body>
