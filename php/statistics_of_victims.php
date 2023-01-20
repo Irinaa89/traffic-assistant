@@ -99,6 +99,7 @@ foreach ($raitings_of_regions as $key => $value) {
           </div>
           <div id="graph" class="graph__chart"></div>
           <div id="graph-raiting" class="graph__chart"></div>
+          <div id="graph-dispersion" class="graph__chart"></div>
         </div>
       </div>
     </main>
@@ -228,7 +229,7 @@ foreach ($raitings_of_regions as $key => $value) {
 
 // Вторая диграмма (рейтинг регионов)
 
-anychart.onDocumentReady(function () {
+  anychart.onDocumentReady(function () {
       // create bar chart
       var chart = anychart.bar();
 
@@ -239,10 +240,10 @@ anychart.onDocumentReady(function () {
       chart.title('10 регионов с наибольшим количеством ДТП');
 
       // create bar series with passed data
-      var series2 = chart.bar(<?php echo json_encode($data_raiting_chart) ?>);
+      var series = chart.bar(<?php echo json_encode($data_raiting_chart) ?>);
 
       // set tooltip settings
-      series2
+      series
         .tooltip()
         .position('right')
         .anchor('left-center')
@@ -252,13 +253,13 @@ anychart.onDocumentReady(function () {
         .format('{%Value} человек(а)');
 
       // colors
-      series2.normal().fill("rgb(183, 0, 255)", 0.4);
-      series2.hovered().fill("rgb(183, 0, 255)", 0.1);
-      series2.selected().fill("rgb(183, 0, 255)", 0.5);
+      series.normal().fill("rgb(183, 0, 255)", 0.4);
+      series.hovered().fill("rgb(183, 0, 255)", 0.1);
+      series.selected().fill("rgb(183, 0, 255)", 0.5);
 
-      series2.normal().stroke("rgb(183, 0, 255)", 1);
-      series2.hovered().stroke("rgb(183, 0, 255)", 2);
-      series2.selected().stroke("rgb(183, 0, 255)", 4);
+      series.normal().stroke("rgb(183, 0, 255)", 1);
+      series.hovered().stroke("rgb(183, 0, 255)", 2);
+      series.selected().stroke("rgb(183, 0, 255)", 4);
 
       // set yAxis labels formatter
       chart.yAxis().labels().format('{%Value}{groupsSeparator: }');
@@ -273,6 +274,116 @@ anychart.onDocumentReady(function () {
 
       // set container id for the chart
       chart.container('graph-raiting');
+      // initiate chart drawing
+      chart.draw();
+    });
+
+     // Дисперсионный график
+     anychart.onDocumentReady(function () {
+      // create bar chart
+      var chart = anychart.bar();
+
+      chart.animation(true);
+
+      chart.padding([10, 40, 5, 20]);
+
+      chart.title("Дисперсия");
+
+      // create bar series with passed data
+      var series = chart.bar(
+        <?php 
+
+        $data = array();
+
+        $query = mysqli_query($connect, "SELECT * FROM statistics_of_victims");
+
+        // Подсчет суммы по регионам
+        $regions_sum = array();
+
+        while ($string = mysqli_fetch_assoc($query)) {
+          if ($string["Subject"] != "Всего по России") {
+            if (isset($regions_sum[$string["Name_of_the_statistical_factor"]])) {
+              $regions_sum[$string["Name_of_the_statistical_factor"]] += (int) $string["Importance_of_the_statistical_factor"];
+            } else {
+              $regions_sum[$string["Name_of_the_statistical_factor"]] = (int) $string["Importance_of_the_statistical_factor"];
+            } 
+          }
+        }
+
+        // Подсчет среднего значения
+        $regions_avg = array();
+
+        foreach($regions_sum as $key => $value) {
+          $regions_avg[$key] = round($regions_sum[$key] / (count($regions) - 1), 2);
+        }
+
+      
+
+        mysqli_data_seek($query, 0);
+
+        $dispersion = array();
+        $numerator = array();
+        while($string = mysqli_fetch_assoc($query)) {
+          foreach($regions_avg as $key => $value) {
+            if($key == $string["Name_of_the_statistical_factor"]) {
+              if (isset($numerator[$key])) {
+                $numerator[$key] += pow((int) $string["Importance_of_the_statistical_factor"] - $value, 2); 
+                $answer = round(sqrt($numerator[$key] / (count($regions) - 1)), 2);
+                $dispersion[$key] = $answer;
+              } else {
+                $numerator[$key] = pow((int) $string["Importance_of_the_statistical_factor"] - $value, 2); 
+              }
+
+            }
+          }
+        }
+
+        foreach($dispersion as $key => $value) {
+          $arr = array();
+          array_push($arr, $key);
+          array_push($arr, $value);
+          array_push($data, $arr);
+        }
+
+
+        echo json_encode($data);
+          
+        ?>
+
+      );
+
+      // set tooltip settings
+      series
+        .tooltip()
+        .position('right')
+        .anchor('left-center')
+        .offsetX(5)
+        .offsetY(0)
+        .titleFormat('{%X}')
+        .format('{%Value}');
+
+      // colors
+      series.normal().fill("rgb(183, 0, 255)", 0.4);
+      series.hovered().fill("rgb(183, 0, 255)", 0.1);
+      series.selected().fill("rgb(183, 0, 255)", 0.5);
+
+      series.normal().stroke("rgb(183, 0, 255)", 1);
+      series.hovered().stroke("rgb(183, 0, 255)", 2);
+      series.selected().stroke("rgb(183, 0, 255)", 4);
+
+      // set yAxis labels formatter
+      chart.yAxis().labels().format('{%Value}{groupsSeparator: }');
+
+      // set titles for axises
+      chart.xAxis().title('').labels().fontSize(12).width(500);
+      chart.yAxis().title('Количество');
+      chart.interactivity().hoverMode('by-x');
+      chart.tooltip().positionMode('point');
+      // set scale minimum
+      chart.yScale().minimum(0);
+
+      // set container id for the chart
+      chart.container('graph-dispersion');
       // initiate chart drawing
       chart.draw();
     });
