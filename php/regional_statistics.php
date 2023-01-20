@@ -61,6 +61,7 @@ $data = array();
           <div class="graph-regions__menu">
             <?php 
 
+            sort($regions);
             foreach ($regions as $value) {
               if (isset($_GET["region"]) && str_replace(' ', '', $value) == $_GET["region"]) {
                 echo '<a href="?region='.str_replace(' ', '', $value).'" class="graph-regions__item active">'.$value.'</a>';
