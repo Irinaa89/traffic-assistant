@@ -379,18 +379,20 @@ $regions = array_unique($regions);
         $dispersion = array();
         $numerator = array();
         while($string = mysqli_fetch_assoc($query)) {
-          foreach($regions_avg as $key => $value) {
-            if($key == $string["Name_of_the_statistical_factor"]) {
-              if (isset($numerator[$key])) {
-                $numerator[$key] += pow($string["Importance_of_the_statistical_factor"] - $value, 2); 
-                $answer = round(sqrt($numerator[$key] / (count($regions) - 1)), 2);
-                $dispersion[$key] = $answer;
-              } else {
-                $numerator[$key] = pow($string["Importance_of_the_statistical_factor"] - $value, 2); 
-              }
+          if ($string["Subject"] != "Всего по России") {
+            foreach($regions_avg as $key => $value) {
+              if($key == $string["Name_of_the_statistical_factor"]) {
+                if (isset($numerator[$key])) {
+                  $numerator[$key] += pow($string["Importance_of_the_statistical_factor"] - $value, 2); 
+                  $answer = round(sqrt($numerator[$key] / (count($regions) - 1)), 2);
+                  $dispersion[$key] = $answer;
+                } else {
+                  $numerator[$key] = pow($string["Importance_of_the_statistical_factor"] - $value, 2); 
+                }
 
+              }
             }
-          }
+         }
         }
 
         foreach($dispersion as $key => $value) {
