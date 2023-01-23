@@ -43,6 +43,7 @@ require("tips.php");
     <main class="tips">
       <div class="container">
         <div class="tips-inner">
+          <h1 class="title">Помощник ПДД</h1>
           <div class="tips__title">СОВЕТЫ ДЛЯ ВОДИТЕЛЕЙ И ПЕШЕХОДОВ</div>
           <div class="tips__content">
             <div class="tips__buttons">
@@ -197,10 +198,10 @@ require("tips.php");
         </div>
       </div>
     </main>
-    <footer class="tips-footer">
+    <footer class="footer-graph">
       <div class="container">
+      <p class="footer__title">Источники открытых данных:</p>
         <div class="footer-inner">
-          <p class="footer__title">Источники открытых данных:</p>
           <ul class="footer__list">
             <li class="footer__list-item">
               <a
@@ -219,6 +220,10 @@ require("tips.php");
                 <span class="keyword">[мвд.рф]</span>
               </a>
             </li>
+          </ul>
+          <ul class="footer__contacts">
+            <li class="footer__contacts-item">Автор: <span>Меркель Ирина</span></li>
+            <li class="footer__contacts-item">irinamerkel979@gmail.com</li>
           </ul>
         </div>
       </div>

@@ -93,15 +93,19 @@ span {
 /* Медиа запросы */
 @media screen and (max-width: 420px), screen and (max-height: 420px) {
   .tips__buttons {
-    width: 25%;
+    width: 100%;
   }
 
   .tips__text {
-    width: 75%;
+    width: 100%;
   }
 
   .tips {
     height: 100%;
+  }
+
+  .tips__content {
+    flex-direction: column;
   }
 
   .robot {

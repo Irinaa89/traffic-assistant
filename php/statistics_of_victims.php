@@ -81,6 +81,7 @@ foreach ($raitings_of_regions as $key => $value) {
     <main class="graph">
       <div class="container">
         <div class="graph-inner">
+        <h1 class="title">Помощник ПДД</h1>
           <p class="graph-regions__title">Выберите регион</p>
           <div class="graph-regions__menu">
             <?php 
@@ -105,8 +106,8 @@ foreach ($raitings_of_regions as $key => $value) {
     </main>
     <footer class="footer-graph">
       <div class="container">
+      <p class="footer__title">Источники открытых данных:</p>
         <div class="footer-inner">
-          <p class="footer__title">Источники открытых данных:</p>
           <ul class="footer__list">
             <li class="footer__list-item">
               <a
@@ -125,6 +126,10 @@ foreach ($raitings_of_regions as $key => $value) {
                 <span class="keyword">[мвд.рф]</span>
               </a>
             </li>
+          </ul>
+          <ul class="footer__contacts">
+            <li class="footer__contacts-item">Автор: <span>Меркель Ирина</span></li>
+            <li class="footer__contacts-item">irinamerkel979@gmail.com</li>
           </ul>
         </div>
       </div>
@@ -287,7 +292,7 @@ foreach ($raitings_of_regions as $key => $value) {
 
       chart.padding([10, 40, 5, 20]);
 
-      chart.title("Дисперсия");
+      chart.title("Стандартное отклонение");
 
       // create bar series with passed data
       var series = chart.bar(

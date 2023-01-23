@@ -51,8 +51,8 @@
     </main>
     <footer class="footer">
       <div class="container">
+      <p class="footer__title">Источники открытых данных:</p>
         <div class="footer-inner">
-          <p class="footer__title">Источники открытых данных:</p>
           <ul class="footer__list">
             <li class="footer__list-item">
               <a
@@ -71,6 +71,10 @@
                 <span class="keyword">[мвд.рф]</span>
               </a>
             </li>
+          </ul>
+          <ul class="footer__contacts">
+            <li class="footer__contacts-item">Автор: <span>Меркель Ирина</span></li>
+            <li class="footer__contacts-item">irinamerkel979@gmail.com</li>
           </ul>
         </div>
       </div>

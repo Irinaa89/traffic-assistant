@@ -1,14 +1,17 @@
 .footer {
   width: 100%;
   padding: 20px 0;
-  position: absolute;
-  bottom: 0;
-  left: 0;
-  z-index: 2;
+}
+
+footer span {
+  color: rgb(183, 0, 255);
 }
 
 .footer-inner {
   text-align: left;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
 }
 
 .footer__title {
@@ -34,6 +37,11 @@
 
 .footer__list-item:hover a {
   color: rgb(183, 0, 255);
+}
+
+.footer__contacts {
+  list-style: none;
+  font-size: 12px;
 }
 
 .keyword {
