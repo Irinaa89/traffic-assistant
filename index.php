@@ -22,7 +22,7 @@
       <div class="container">
         <div class="header-inner">
           <ul class="header__list">
-            <a href="./php/regional_statistics.php" class="header__list-item">Стастистика регионов</a>
+            <a href="./php/regional_statistics.php" class="header__list-item">Статистика регионов</a>
             <a href="./php/statistics_of_victims.php" class="header__list-item">Статистика пострадавших</a>
             <a href="./php/tips_and_recommendations.php" class="header__list-item">Советы и рекомендации</a>
           </ul>
@@ -39,12 +39,11 @@
             width="200"
             height="200"
           />
-          <h1 class="main__title">Помощник ПДД</h1>
+          <h1 class="main__title">Дорожная безопасность</h1>
           <p class="main__info">
-            Приложение использует <span class="keyword">открытые данные</span>,
-            связанные с дорожно-транспортными происшествиями, чтобы
-            проанализировать их, отобразить пользователю и дать рекомендации как
-            избежать те или иные виды ДТП и сохранить свое здоровье.
+                Приложение поможет пользователю проанализировать <span class="keyword">открытые данные</span>, 
+                связанные с дорожно-транспортными происшествиями по всем регионам России, а также дать рекомендации, как
+                избежать те или иные виды ДТП и сохранить свое здоровье.
           </p>
         </div>
       </div>

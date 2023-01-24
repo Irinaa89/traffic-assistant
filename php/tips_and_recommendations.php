@@ -29,6 +29,8 @@ require("tips.php");
             <a href="../index.php" class="header__list-item statistics-item"
               >Вернуться назад
             </a>
+            <a href="../php/regional_statistics.php" class="header__list-item">Статистика регионов</a>
+            <a href="../php/statistics_of_victims.php" class="header__list-item">Статистика пострадавших</a>
             <img
               src="../images/robot-love-svgrepo-com.svg"
               alt="pdd-helper"
@@ -43,7 +45,7 @@ require("tips.php");
     <main class="tips">
       <div class="container">
         <div class="tips-inner">
-          <h1 class="title">Помощник ПДД</h1>
+          <h1 class="title">Дорожная безопасность</h1>
           <div class="tips__title">СОВЕТЫ ДЛЯ ВОДИТЕЛЕЙ И ПЕШЕХОДОВ</div>
           <div class="tips__content">
             <div class="tips__buttons">
@@ -198,7 +200,7 @@ require("tips.php");
         </div>
       </div>
     </main>
-    <footer class="footer-graph">
+    <footer class="footer">
       <div class="container">
       <p class="footer__title">Источники открытых данных:</p>
         <div class="footer-inner">

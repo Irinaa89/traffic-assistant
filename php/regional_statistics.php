@@ -42,6 +42,8 @@ $regions = array_unique($regions);
             <a href="../index.php" class="header__list-item statistics-item"
               >Вернуться назад
             </a>
+            <a href="../php/statistics_of_victims.php" class="header__list-item">Статистика пострадавших</a>
+            <a href="../php/tips_and_recommendations.php" class="header__list-item">Советы и рекомендации</a>
             <img
               src="../images/robot-love-svgrepo-com.svg"
               alt="pdd-helper"
@@ -56,7 +58,9 @@ $regions = array_unique($regions);
     <main class="graph">
       <div class="container">
         <div class="graph-inner">
-          <h1 class="title">Помощник ПДД</h1>
+          <h1 class="title">Дорожная безопасность</h1>
+          <p class="title-menu">Статистика регионов</p>
+        <p class="title-date">Данные за 2022 год</p>
           <p class="graph-regions__title">Выберите регион</p>
           <div class="graph-regions__menu">
             <?php 
