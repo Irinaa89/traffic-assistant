@@ -241,12 +241,12 @@ $regions = array_unique($regions);
 
         <?php 
 
-        $data = array();
         $region = "";
 
 
         if (isset($_GET["region"])) {
 
+          // определяем название региона со всеми пробелами
           foreach ($regions  as $value) {
               if (str_replace(' ', '', $value) == $_GET["region"]) {
                 $query = mysqli_query($connect, "SELECT * FROM regional_statistics WHERE Subject='".$value."'");
@@ -254,14 +254,10 @@ $regions = array_unique($regions);
               }
           }
 
+          // создаем массив с названиями статистических факторов, у которых есть слово "всего"
           $percent_chart_keys = array();
         
           while ($string = mysqli_fetch_assoc($query)) {
-            $arr = array();
-            array_push($arr, $string["Name_of_the_statistical_factor"]);
-            array_push($arr, (int)$string["Importance_of_the_statistical_factor"]);
-            array_push($data, $arr);
-
             if (str_contains($string["Name_of_the_statistical_factor"], "всего")) {
               $percent_chart_keys[$string["Name_of_the_statistical_factor"]] = (int)$string["Importance_of_the_statistical_factor"];
             }
